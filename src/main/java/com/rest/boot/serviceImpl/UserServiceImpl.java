@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService{
 		if(user.getId() != null) {
 			userRepository.save(user);
 			msg = "User updated";
-		}else {
+		}else {  
 			msg = "Update failed !";
 		}
 		return msg;
@@ -43,6 +43,19 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Optional<User> findById(Integer id) {
 		return userRepository.findById(id);
+	}
+
+	@Override
+	public String deleteUser(Integer id) {
+		String msg = null;
+		Optional<User> user = userRepository.findById(id);
+		if(user.isPresent()) {
+			userRepository.delete(user.get());
+			msg = "User was deleted";
+		}else {
+			msg = "Can not find the user";
+		}
+		return msg;
 	}
 	
 }

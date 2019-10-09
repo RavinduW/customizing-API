@@ -10,5 +10,6 @@ public interface UserService {
 	List<User> findAllUsers();
 	String saveUser(User user);
 	String updateUser(User user);
-	Optional<User> findById(Integer id);	
+	Optional<User> findById(Integer id);
+	String deleteUser(Integer id);	
 }
