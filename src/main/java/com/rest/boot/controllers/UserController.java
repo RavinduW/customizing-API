@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rest.boot.exceptions.UserNotFoundException;
 import com.rest.boot.models.User;
 import com.rest.boot.services.UserService;
 
@@ -39,12 +40,17 @@ public class UserController {
 	}
 	
 	@GetMapping("/find/{id}")
-	public Optional<User> getUserById(@PathVariable Integer id){
+	public User getUserById(@PathVariable Integer id) throws UserNotFoundException{
 		return userService.findById(id);
 	}
 	
 	@DeleteMapping("/delete/{id}")
 	public String deleteUser(@PathVariable Integer id) {
 		return userService.deleteUser(id);
+	}
+	
+	@GetMapping("/find-user/{firstname}")
+	public User getUserByFirstname(@PathVariable String firstname) throws UserNotFoundException {
+		return userService.findByFirstname(firstname);
 	}
 }

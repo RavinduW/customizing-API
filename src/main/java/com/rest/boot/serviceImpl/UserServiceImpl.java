@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rest.boot.exceptions.UserNotFoundException;
 import com.rest.boot.models.User;
 import com.rest.boot.repositories.UserRepository;
 import com.rest.boot.services.UserService;
@@ -41,8 +42,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public Optional<User> findById(Integer id) {
-		return userRepository.findById(id);
+	public User findById(Integer id) throws UserNotFoundException{
+		
+		return userRepository.findById(id).orElseThrow(()->new UserNotFoundException("User not found"));
 	}
 
 	@Override
@@ -57,5 +59,12 @@ public class UserServiceImpl implements UserService{
 		}
 		return msg;
 	}
+
+	@Override
+	public User findByFirstname(String firstname) throws UserNotFoundException {
+		return userRepository.findByFirstname(firstname).orElseThrow(()->new UserNotFoundException("User not found"));
+	}
+	
+	
 	
 }
