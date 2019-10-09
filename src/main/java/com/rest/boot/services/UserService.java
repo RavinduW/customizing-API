@@ -1,7 +1,6 @@
 package com.rest.boot.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.rest.boot.exceptions.UserNotFoundException;
 import com.rest.boot.models.User;
